@@ -29,32 +29,31 @@ for e in range(epochs):
     del_w_hidden_output = np.zeros(weights_hidden_output.shape)
     for x, y in zip(features.values, targets):
         ## Forward pass ##
-        # TODO: Calculate the output
+        #  Calculate the output
         hidden_input = np.dot(x, weights_input_hidden)
         hidden_output = sigmoid(hidden_input)
-        output = sigmoid(hidden_output * weights_hidden_output)
+        output = sigmoid(np.dot(hidden_output, weights_hidden_output))
 
         ## Backward pass ##
-        # TODO: Calculate the network's prediction error
+        #  Calculate the network's prediction error
         error = y - output
 
-        # TODO: Calculate error term for the output unit
+        #  Calculate error term for the output unit
         output_error_term = error * output * (1 - output)
 
         ## propagate errors to hidden layer
 
-        # TODO: Calculate the hidden layer's contribution to the error
+        #  Calculate the hidden layer's contribution to the error
         hidden_error = np.dot(output_error_term, weights_hidden_output)
 
-        # TODO: Calculate the error term for the hidden layer
-        hidden_error_term = output_error_term * weights_hidden_output * hidden_output * (1 - hidden_output)
+        #  Calculate the error term for the hidden layer
+        hidden_error_term = hidden_error * hidden_output * (1 - hidden_output)
 
-
-        # TODO: Update the change in weights
+        #  Update the change in weights
         del_w_hidden_output += output_error_term * hidden_output
         del_w_input_hidden += hidden_error_term * x[:, None]
 
-    # TODO: Update weights
+    # Update weights
     weights_input_hidden += learnrate * del_w_input_hidden / n_records
     weights_hidden_output += learnrate * del_w_hidden_output / n_records
 
