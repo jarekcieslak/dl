@@ -28,6 +28,7 @@ w = np.array([0.5, -0.5, 0.3, 0.1])
 
 # Calculate the node's linear combination of inputs and weights
 h = np.dot(x, w)
+print(h)
 
 # Calculate output of neural network
 nn_output = sigmoid(h)
@@ -54,3 +55,5 @@ print('Amount of Error:')
 print(error)
 print('Change in Weights:')
 print(del_w)
+
+print(error_term)
